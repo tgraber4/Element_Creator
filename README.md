@@ -10,6 +10,6 @@ Comment:
 - Ex: <_p_> hello <_a_> there <_a_> Bob! <_p_>
 
 
-Instructions
-1.) Add HTML element modifiers (Example in js file) to styleList and InstructList.
+Instructions<br />
+1.) Add HTML element modifiers (Example in js file) to styleList and InstructList. <br />
 2.) If it requires a special case update MODIFIERS section of code
