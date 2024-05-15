@@ -12,15 +12,23 @@ var myFunction = function () {
     var Instructions = [];
     var elementUses = []; // tells how many of each type of element there currently is in the code
     var tempInstruct = [];
-    
-    
     var currentlayer = 0;
     console.log(boxstring);
     var error = 0;
     var errorlist = ["<abbr>", "<br>", "<ins>", "<cite>", "<del>", "<dfn>"];
     var singleElements = ["area", "base", "col", "embed", "img", "input", "link", "meta", "option", "source"];
+
+    /*
+    Use styleList and InstructList for modifiers(Ex: class="title" inside a div element).
+    Each element of styleList corespondes to the matching element in InstructList.
+    */
     var styleList = ["class=", "id=", "type=", "value="];
     var InstructList = ['[elem878!4].classList.add("[demo878!4]", "[demo878!4]2");', '[elem878!4].id = "[demo878!4]";', '[elem878!4].type = "[demo878!4]";', '[elem878!4].value = "[demo878!4]";'];
+    /* ------------- Adding to These Example -------------
+
+    styleList.push("id=");
+    InstructList.push('[elem878!4].id = "[demo878!4]";');
+    */
     var arrowtest = -1;
     var tempj = 0;
     var tempnum = 0;
@@ -153,7 +161,9 @@ var myFunction = function () {
     /*
     ------------------------------------  MODIFIERS  ------------------------------------
     
-    This is where you can Modify the parts within the HTML element (code section below)
+    This is where you can modify the parts within the HTML element 
+
+    If there are special cases then you will have to add them here.
     
     */
               if (tempstring2.includes("[elem878!4]")) {
@@ -172,7 +182,10 @@ var myFunction = function () {
               } else {
                 tempstring2 = tempstring2.replace("[demo878!4]", tempstring); 
               }
-              // end of modifiers
+    /* 
+    ------------------------------------  END OF MODIFIERS  ------------------------------------
+
+    */
               Instructions.unshift(tempstring2);
             }
           }
@@ -241,57 +254,6 @@ var myFunction = function () {
     
     
     }
-    }
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* <h2> 2023 - 2024 </h2>
-        <div class="flexbox">
-            <div class="team">
-                <p class="title">President</p>
-                <p>Graham Bond</p>
-            </div>
-            <div class="team">
-                <p class="title">Vice President</p>
-                <p>Luke Sanders</p>
-            </div>
-            <div class="team">
-                <p class="title">Team Leads</p>
-                <p>Logan Frommelt</p>
-                <p>Michael Mischkot</p>
-                <p>Landon Toler</p>
-            </div>
-        </div>
-        <div class="gap"></div>
-        <div class="flexbox">
-            <div class="team">
-                <p class="title2">Design Proposal</p>
-                <p>2nd / 149</p>
-            </div>
-            <div class="team">
-                <p class="title2">Design Report</p>
-                <p>TBD</p>
-            </div>
-            <div class="team">
-                <p class="title2">Fly-Off</p>
-                <p>TBD</p>
-            </div>
-        </div>
-        <div class="gap"></div>
-        <h3 class="update_title">Updates</h3>
-        <h3> Mizzou AeroTigers Co. founded as a 501(c)(3) nonprofit corporation</h3>
-        <div class="gap"></div> */
