@@ -1,11 +1,9 @@
+
+// TODO
 /*
-------------------------   Notes   ------------------------
-- if an element sometimes doesn't have an end tag, add it to sometimesSingleElements.
-    - Ex: <option value="0">Toyota</option>
-          <option value="Toyota">          
+- make sure quotations work correctly
+- test to make sure things work with some examples
 */
-
-
 var myFunction = function () {
   var box = document.getElementById("w3review");
   var boxstring = box.value;
@@ -30,8 +28,12 @@ var myFunction = function () {
   Use styleList and InstructList for modifiers(Ex: class="title" inside a div element).
   Each element of styleList corespondes to the matching element in InstructList.
   */
-  var styleList = ["class=", "id=", "type=", "value=", "href=", "src="];
-  var InstructList = ['[elem878!4].classList.add("[demo878!4]", "[demo878!4]2");', '[elem878!4].id = "[demo878!4]";', '[elem878!4].type = "[demo878!4]";', '[elem878!4].value = "[demo878!4]";', '[elem878!4].href = "[demo878!4]";', '[elem878!4].src = "[demo878!4]";'];
+
+  // element.onclick = function() { openFullscreen() };
+  // onclick="openFullscreen()"
+  // '[elem878!4].onclick = function() { [demo878!4] };'
+  var styleList = ["class=", "id=", "type=", "value=", "href=", "src=", "onclick="];
+  var InstructList = ['[elem878!4].classList.add("[demo878!4]", "[demo878!4]2");', '[elem878!4].id = "[demo878!4]";', '[elem878!4].type = "[demo878!4]";', '[elem878!4].value = "[demo878!4]";', '[elem878!4].href = "[demo878!4]";', '[elem878!4].src = "[demo878!4]";', '[elem878!4].onclick = function() { [demo878!4] };'];
   /* ------------- Adding to These Example -------------
 
   styleList.push("id=");
@@ -39,6 +41,36 @@ var myFunction = function () {
 
   (-) [elem878!4].id = "[demo878!4]";   ---->   comes from element.id = "[id here]";
   */
+
+  var checkIfElementIsSingle = function (tempj, start) {
+    // returns 1 if it's not single
+    // returns 0 if it's a single
+    var newtempj = tempj;
+    var elementType = elements[tempj][0];
+    if (singleElements.includes(elements[tempj][0])) {
+      return 0;
+    }
+    if (sometimesSingleElements.includes(elementType) === true) {
+      var tempchecker = 0;
+      for (var k = start; k < realarrows.length; k++) {
+        if (realarrows[k] === "</" + elementType + ">") { // checks if it has an endtag
+          tempchecker = 1;
+          console.log("endtag: "+ realarrows[k]);
+          break;
+        } else if (elements[newtempj][0] === elementType) { // checks for more of the same type
+          console.log("next same element: " + elements[newtempj][0]);
+          break;
+        }
+        if (realarrows[k].charAt(1) != "/") {
+          newtempj++;
+        }
+      }
+      return tempchecker;
+    } else {
+      return 1;
+    }
+
+  }
   var arrowtest = -1;
   var tempj = 0;
   var tempnum = 0;
@@ -181,9 +213,10 @@ var myFunction = function () {
     }
   }
   findModifiers();
+  tempj = 0;
   for (var i = 0; i < realarrows.length; i++) {
     if (realarrows[i].charAt(1) != "/") {
-      if ((i + 1) < realarrows.length && realarrows[i + 1].charAt(1) != "/") {
+      if (((i + 1) < realarrows.length && realarrows[i + 1].charAt(1) != "/") || checkIfElementIsSingle(tempj, i + 1) === 0) {
         content.push("N/A"); 
       } else {
         tempstring = "";
@@ -198,62 +231,21 @@ var myFunction = function () {
           }
         }
       }
+      tempj++;
     }
   }
-  var checkIfElementIsSingle = function (tempj, start) {
-    // returns 1 if it's not single
-    // returns 0 if it's a single
-    var newtempj = tempj;
-    var elementType = elements[tempj][0];
-    if (singleElements.includes(elements[tempj][0])) {
-      return 0;
-    }
-    if (sometimesSingleElements.includes(elementType) === true) {
-      var tempchecker = 0;
-      for (var k = start; k < realarrows.length; k++) {
-        if (realarrows[k] === "</" + elementType + ">") { // checks if it has an endtag
-          tempchecker = 1;
-          console.log("endtag: "+ realarrows[k]);
-          break;
-        } else if (elements[newtempj][0] === elementType) { // checks for more of the same type
-          console.log("next same element: " + elements[newtempj][0]);
-          break;
-        }
-        if (realarrows[k].charAt(1) != "/") {
-          newtempj++;
-        }
-      }
-      return tempchecker;
-    } else {
-      return 1;
-    }
-
-  }
-  /*
-  Testing
-  <div>
-  <area class="orange" id="orange">
-  <area class="orange" id="orange">
-  <area class="orange" id="orange">
-  </div>
-
-  <div>
-    <p>hello</p>
-    <h1>hi</h1>
-  </div>
-  */
   tempj = 0;
   for (var i = 0; i < realarrows.length; i++) {
     if (realarrows[i].charAt(1) == "/") {
       currentlayer--;
     } else {
       layers.push(currentlayer);
-      var singlechecker = checkIfElementIsSingle(tempj, i + 1);
-      if (singlechecker === 1) {
-        currentlayer++;
-        if (currentlayer > highestlayer) {
-          highestlayer = currentlayer;
-        }
+      currentlayer++;
+      if (currentlayer > highestlayer) {
+        highestlayer = currentlayer;
+      }
+      if (checkIfElementIsSingle(tempj, i + 1) === 0) {
+        currentlayer--;
       }
       tempj++;
     }
@@ -275,8 +267,6 @@ var myFunction = function () {
     }
   }
   
-  
-  // console.log(highestlayer);
   while (highestlayer != -1) {
     for (var i = 0; i < layers.length; i++) {
       if (layers[i] === highestlayer) {
@@ -309,10 +299,10 @@ var myFunction = function () {
             if (tempstring2.includes("[elem878!4]")) {
               tempstring2 = tempstring2.replace("[elem878!4]", elements[i][0] + elementUses[elements[i][0]])
             }
-            if (tempstring2.includes("classList")) {
+            if (tempstring2.includes("classList")) { // only works for 2 classes, will need to modify for more
                 if (tempstring.includes(" ")) {
                 var classTempString1 = tempstring.slice(0, tempstring.indexOf(" "));
-                var classTempString2 = tempstring.slice(tempstring.indexOf(" "), tempstring.length);
+                var classTempString2 = tempstring.slice(tempstring.indexOf(" ") + 1, tempstring.length);
                 tempstring2 = tempstring2.replace("[demo878!4]", classTempString1);
                 tempstring2 = tempstring2.replace("[demo878!4]2", classTempString2);
                 } else {
