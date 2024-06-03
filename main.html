@@ -2,7 +2,7 @@
 <body>
 <link rel="stylesheet" href="main.css">
 <h1>HTML Elements to Javascript Converter</h1>
-  <p>Can't have elements inside of an element that has text in it</p>
+  <p>Can't have text and a block element inside a block element</p>
   <p id="insert"></p>
 
   <p class="instr">Enter HTML code here:</p>
@@ -20,16 +20,15 @@
 <script>
 /* 
 Note:
-- Can't have a [____ element] within a text element
-Ex: <a>, <abbr>, <b>, <br>, , <bdi>, <cite>, <code>, <del>, <ins>, <dfn>, <em>, <i>, <u>, <kbd>
+- Can't have two inline-elements within a block element
+Ex: , <del>, <ins>, <u>
 
-- Can't have <> in text elements (messes up program)
+
 */
 
-// single ones: <area>, <base>, <col>, <embed>, <img>, <input>, <link>, <meta>, <option>, <source>
 
 const insert = document.getElementById("insert");
-insert.innerHTML = "Ex: < p > This is < a > text < a > < /p >"
+insert.innerText = "Ex: <div>not<p>good</p></div>";
 
 </script>
 <script src="script.js"></script>
