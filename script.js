@@ -29,9 +29,7 @@ var myFunction = function () {
   Each element of styleList corespondes to the matching element in InstructList.
   */
 
-  // element.onclick = function() { openFullscreen() };
-  // onclick="openFullscreen()"
-  // '[elem878!4].onclick = function() { [demo878!4] };'
+  
   var styleList = ["class=", "id=", "type=", "value=", "href=", "src=", "onclick="];
   var InstructList = ['[elem878!4].classList.add("[demo878!4]", "[demo878!4]2");', '[elem878!4].id = "[demo878!4]";', '[elem878!4].type = "[demo878!4]";', '[elem878!4].value = "[demo878!4]";', '[elem878!4].href = "[demo878!4]";', '[elem878!4].src = "[demo878!4]";', '[elem878!4].onclick = function() { [demo878!4] };'];
   /* ------------- Adding to These Example -------------
