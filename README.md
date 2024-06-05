@@ -10,8 +10,8 @@ View on Youtube: https://www.youtube.com/watch?v=_qekOdp7cu4
 ------------------------------------------------------------------------------------------------
 
 Comment:
-- Does not work for text modifier elements inside a text element
-- Ex: <_p_> hello <_a_> there <_a_> Bob! <_p_>
+- Can't have text and a block element inside a block element
+- Ex: <_div_>not<_p_>good<_/p_><_/div_>"
 
 
 Instructions<br />
