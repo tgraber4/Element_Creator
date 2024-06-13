@@ -25,13 +25,13 @@ var myFunction = function () {
   var singleElements = ["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "param", "source", "track", "wbr"];
   var sometimesSingleElements = ["option"];
   /*
-  Use styleList and InstructList for modifiers(Ex: class="title" inside a div element).
-  Each element of styleList corespondes to the matching element in InstructList.
+  Use styleList and InstructList for attributes(Ex: class="title" inside a div element).
+  Each item of styleList corespondes to the matching item(same index) in InstructList.
   */
 
   
-  var styleList = ["class=", "id=", "type=", "value=", "href=", "src=", "onclick="];
-  var InstructList = ['[elem878!4].classList.add("[demo878!4]", "[demo878!4]2");', '[elem878!4].id = "[demo878!4]";', '[elem878!4].type = "[demo878!4]";', '[elem878!4].value = "[demo878!4]";', '[elem878!4].href = "[demo878!4]";', '[elem878!4].src = "[demo878!4]";', '[elem878!4].onclick = function() { [demo878!4] };'];
+  var styleList = ["class=", "id=", "type=", "value=", "href=", "src=", "onclick=", "width=", "height=", "controls"];
+  var InstructList = ['[elem878!4].setAttribute("class", "[demo878!4]");', '[elem878!4].id = "[demo878!4]";', '[elem878!4].type = "[demo878!4]";', '[elem878!4].value = "[demo878!4]";', '[elem878!4].href = "[demo878!4]";', '[elem878!4].src = "[demo878!4]";', '[elem878!4].onclick = function() { [demo878!4] };', '[elem878!4].setAttribute("width", [demo878!4]);', '[elem878!4].setAttribute("height", [demo878!4]);', '[elem878!4].setAttribute("controls", true);'];
   /* ------------- Adding to These Example -------------
 
   styleList.push("id=");
@@ -278,40 +278,33 @@ var myFunction = function () {
           if (elements[i][1].indexOf(styleList[k]) >= 0) {
             var num10 = elements[i][1].indexOf(styleList[k]) + styleList[k].length + 1;
             tempstring = "";
-            for (var j = 0; j > -1; j++) {
-              if (elements[i][1].charAt(num10 + j) === '"') {
-                j = -10;
-              } else {
-              tempstring = tempstring + elements[i][1].charAt(num10 + j);
+            if (styleList[k].includes("=")) {
+              for (var j = 0; j > -1; j++) {
+                if (elements[i][1].charAt(num10 + j) === '"') {
+                  j = -10;
+                } else {
+                tempstring = tempstring + elements[i][1].charAt(num10 + j);
+                }
               }
             }
             tempstring2 = InstructList[k];
-  /*
-  ------------------------------------  MODIFIERS  ------------------------------------
-  
-  This is where you can modify the parts within the HTML element 
+            if (tempstring2.includes("[elem878!4]")) {
+              tempstring2 = tempstring2.replace("[elem878!4]", elements[i][0] + elementUses[elements[i][0]])
+            }
+            /*
+  ------------------------------------  SPECIAL ATTRIBUTES ------------------------------------ 
 
   If there are special cases then you will have to add them here.
   
   */
-            if (tempstring2.includes("[elem878!4]")) {
-              tempstring2 = tempstring2.replace("[elem878!4]", elements[i][0] + elementUses[elements[i][0]])
-            }
-            if (tempstring2.includes("classList")) { // only works for 2 classes, will need to modify for more
-                if (tempstring.includes(" ")) {
-                var classTempString1 = tempstring.slice(0, tempstring.indexOf(" "));
-                var classTempString2 = tempstring.slice(tempstring.indexOf(" ") + 1, tempstring.length);
-                tempstring2 = tempstring2.replace("[demo878!4]", classTempString1);
-                tempstring2 = tempstring2.replace("[demo878!4]2", classTempString2);
-                } else {
-                  tempstring2 = tempstring2.replace("[demo878!4]", tempstring);
-                  tempstring2 = tempstring2.replace(', "[demo878!4]2"', "");
-                }
-            } else {
-              tempstring2 = tempstring2.replace("[demo878!4]", tempstring); 
-            }
+            
+            if (tempstring2.includes("[demo878!4]")) {
+              tempstring2 = tempstring2.replace("[demo878!4]", tempstring);
+            } 
+            
+            
   /* 
-  ------------------------------------  END OF MODIFIERS  ------------------------------------
+  ------------------------------------  END OF SPECIAL ATTRIBUTES ------------------------------------
 
   */
             Instructions.unshift(tempstring2);
