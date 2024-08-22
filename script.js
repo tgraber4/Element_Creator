@@ -30,8 +30,8 @@ var myFunction = function () {
   */
 
   
-  var styleList = ["class=", "id=", "type=", "value=", "href=", "src=", "onclick=", "width=", "height=", "controls", "frameborder=", "referrerpolicy="];
-  var InstructList = ['[elem878!4].setAttribute("class", "[demo878!4]");', '[elem878!4].id = "[demo878!4]";', '[elem878!4].type = "[demo878!4]";', '[elem878!4].value = "[demo878!4]";', '[elem878!4].href = "[demo878!4]";', '[elem878!4].src = "[demo878!4]";', '[elem878!4].onclick = function() { [demo878!4] };', '[elem878!4].setAttribute("width", [demo878!4]);', '[elem878!4].setAttribute("height", [demo878!4]);', '[elem878!4].setAttribute("controls", true);', '[elem878!4].setAttribute("frameborder", [demo878!4]);', '[elem878!4].setAttribute("referrerpolicy", "[demo878!4]");'];
+  var styleList = ["class=", "id=", "type=", "value=", "href=", "src=", "onclick=", "width=", "height=", "controls", "frameborder=", "referrerpolicy=", "title=", "data-gloss="];
+  var InstructList = ['[elem878!4].setAttribute("class", "[demo878!4]");', '[elem878!4].id = "[demo878!4]";', '[elem878!4].type = "[demo878!4]";', '[elem878!4].value = "[demo878!4]";', '[elem878!4].href = "[demo878!4]";', '[elem878!4].src = "[demo878!4]";', '[elem878!4].onclick = function() { [demo878!4] };', '[elem878!4].setAttribute("width", [demo878!4]);', '[elem878!4].setAttribute("height", [demo878!4]);', '[elem878!4].setAttribute("controls", true);', '[elem878!4].setAttribute("frameborder", [demo878!4]);', '[elem878!4].setAttribute("referrerpolicy", "[demo878!4]");', '[elem878!4].setAttribute("title", "[demo878!4]")', '[elem878!4].setAttribute("data-gloss", "[demo878!4]")'];
   /* ------------- Adding to These Example -------------
 
   styleList.push("id=");
