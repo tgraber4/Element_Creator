@@ -2,7 +2,6 @@
 // TODO
 /*
 - make sure quotations work correctly
-- test to make sure things work with some examples
 */
 var myFunction = function () {
   var box = document.getElementById("w3review");
@@ -132,6 +131,19 @@ var myFunction = function () {
   5.) Add index of parent element(element to left) to contentchecklist if not already in there
 
   */
+  
+  var getElementType = function (elementString) {
+    var k = 1;
+    var elemTempString = "";
+    while (k != -1) {
+      if (elementString.charAt(k) == " " || elementString.charAt(k) == ">") {
+        break;
+      }
+      elemTempString = elemTempString + elementString.charAt(k);
+      k++;
+    }
+    return elemTempString
+  }
   var findModifiers = function () {
     var tempArrowNum = realarrows.length
     tempj = 0;
@@ -141,6 +153,7 @@ var myFunction = function () {
         if (inlineModifierElements.includes(elements[tempj][0])) {
           if (realarrows[i + 1] === ("</" + elements[tempj][0] + ">") || singleElements.includes(elements[tempj][0])) { // if next tag(stuff inside/including <>) is the </>      #1
             testmodifiers = 1;
+            
           } else {
             var j = i + 1;
             var newtempj = tempj + 1;
@@ -180,13 +193,20 @@ var myFunction = function () {
                   }
                 }
                 if (testmodifiers === 1) { // #3 and #4 are met
-                  console.log("remove:" + elements[tempj][0]);
                   if (singleElements.includes(elements[tempj][0]) === false) {
+                    var duplicateCounter = 0;
                     for (var j = i + 1; j < tempArrowNum; j++) {
-                      if (realarrows[j] === ("</" + elements[tempj][0] + ">")) {
+                      if (realarrows[j].charAt(1) != "/" && getElementType(realarrows[j]) === elements[tempj][0]) {
+                        duplicateCounter++;
+                      } else if (realarrows[j] === ("</" + elements[tempj][0] + ">")) {
+                        if (duplicateCounter === 0) {
                         realarrows.splice(j, 1);
                         arrows.splice(j, 1);
-                      }
+                        break;
+                        } else {
+                          duplicateCounter--;
+                        }
+                      } 
                     }
                     realarrows.splice(i, 1);
                     arrows.splice(i, 1);
@@ -367,6 +387,13 @@ var myFunction = function () {
     const codeh3 = document.getElementById("h3");
     codeh3.innerHTML = "Generated Code";
   }
+  var clearInstructions = function () {
+    const box = document.getElementById("box");
+    while (box.firstChild) { 
+			box.firstChild.remove(); 
+		}
+  }
+  clearInstructions();
   for (var i = 0; i < Instructions.length; i++) {
     const box = document.getElementById("box");
     const p1 = document.createElement("p");
