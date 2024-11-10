@@ -1,12 +1,16 @@
 # **Element Creator**
 ----------------------------------
+![Screenshot 2024-09-05 220742](https://github.com/user-attachments/assets/df75521d-0f14-4d45-89cd-88c9aaa27303)
+
 Turn HTML Code into javascript. 
 This can help you if you have a section
 of HTML that you want to be copied and replicated several times
 (Ex: a display of an item inside a shopping website).
 
 ------------------------------------------------------------------------------------------------
+
 View on Youtube: https://www.youtube.com/watch?v=_qekOdp7cu4 
+
 ------------------------------------------------------------------------------------------------
 
 Comment:
@@ -17,5 +21,5 @@ Comment:
 Instructions<br />
 1.) Add HTML element attributes (Example in js file) to styleList and InstructList if they aren't there already. <br />
 2.) If it requires a special case update SPECIAL ATTRIBUTES section of code <br />
-3.) When pasting generated code make sure to include a definer for element <be />
-- Ex: var element = document.getElementById("[name of parent element]");
+3.) When pasting generated code make sure to include a definer for element <br />
+&emsp; Ex: var element = document.getElementById("[name of parent element]");
